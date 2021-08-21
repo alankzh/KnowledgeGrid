@@ -2,16 +2,19 @@ package alankzh.leetcode;
 
 import alankzh.common.ListNode;
 
+/**
+ * 解决了，但不够优雅，继续优化
+ */
 @Deprecated
 public class LeetCode82 {
     public static void main(String[] args) {
-        ListNode listNode = new ListNode(1);
+        ListNode listNode = new ListNode(2);
         listNode.next = new ListNode(2);
         listNode.next.next = new ListNode(3);
-        listNode.next.next.next = new ListNode(3);
-        listNode.next.next.next.next = new ListNode(4);
-        listNode.next.next.next.next.next = new ListNode(4);
-        listNode.next.next.next.next.next.next = new ListNode(5);
+//        listNode.next.next.next = new ListNode(3);
+//        listNode.next.next.next.next = new ListNode(4);
+//        listNode.next.next.next.next.next = new ListNode(4);
+//        listNode.next.next.next.next.next.next = new ListNode(5);
 
         System.out.println(deleteDuplicates(listNode));
     }
@@ -21,42 +24,59 @@ public class LeetCode82 {
             return head;
         }
 
-        ListNode result = null;
-        ListNode end = null;
+        ListNode dump = new ListNode(-101);
+        ListNode curOk = null;
 
         ListNode cur = head;
         ListNode next = head.next;
 
-        int repeatNum = Integer.MAX_VALUE;
+        int repeatNum = 101;
 
-        for (;  next != null; ) {
-            if (next.val != cur.val) {
-                if (cur.val != repeatNum) {
-                    if (result == null && end == null) {
-                        result = cur;
-                        end = cur;
-                    } else {
-                        end.next = cur;
-                    }
-                }
-                repeatNum = Integer.MAX_VALUE;
-            } else {
+        for (;  next!= null; ) {
+            // 相等，标记重复值，向后走
+            if (next.val == cur.val) {
                 repeatNum = cur.val;
+                next = next.next;
+                continue;
             }
 
-            cur = cur.next;
+            // 不相等，且都不相同，都往后走
+            if (cur.val != repeatNum) {
+                // 结果链表记录，记录头
+                if (curOk == null) {
+                    curOk = cur;
+                    dump.next = curOk;
+                } else {
+                    // 结果链表记录，记录尾
+                    curOk.next = cur;
+                    curOk = curOk.next;
+                }
+                cur = cur.next;
+                next = next.next;
+                continue;
+            }
+
+            // 不相等，且相同，删除当前链表,重置重复值，继续往后走
+            repeatNum = 101;
+            cur = next;
             next = next.next;
         }
 
-        return result;
+        // 清理最后的尾部
+        if (repeatNum != 101) {
+            if (curOk != null) {
+                curOk.next = null;
+            }
+        } else {
+            if (curOk != null) {
+                curOk.next = cur;
+            } else {
+                curOk = cur;
+                dump.next = curOk;
+            }
+        }
+
+        return dump.next;
     }
 
-    private static void add(ListNode result, ListNode end, ListNode wantAdd) {
-        if (result == null && end == null) {
-            result = wantAdd;
-            end = wantAdd;
-            return;
-        }
-        end.next = wantAdd;
-    }
 }
