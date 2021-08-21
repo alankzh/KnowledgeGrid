@@ -1,0 +1,24 @@
+includeProject 'algorithm'
+
+rootProject.name = 'KnowledgeGrid'
+
+
+def includeDir(dir) {
+    FileFilter filter = {
+        it.isDirectory() && file("${it.absolutePath}${File.separator}build.gradle").isFile()
+    }
+    file(dir).listFiles(filter).each {
+        include it.name
+        project(":${it.name}").projectDir = file(it.absolutePath)
+    }
+}
+
+
+def includeProject(dir){
+    String absPath = file(dir).absolutePath
+    String name = file(dir).name
+    if (file(dir).isDirectory() && file("${absPath}${File.separator}build.gradle").isFile()){
+        include dir
+        project(":${name}").projectDir = file(absPath)
+    }
+}

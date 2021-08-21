@@ -1,0 +1,72 @@
+buildscript {
+    repositories {
+        flatDir {
+            dirs "$rootDir${File.separator}lib${File.separator}build"
+        }
+        maven { url "https://maven.aliyun.com/repository/central" }
+        maven { url "https://maven.aliyun.com/repository/jcenter" }
+        maven { url "https://maven.aliyun.com/repository/spring" }
+        maven { url "https://maven.aliyun.com/repository/gradle-plugin" }
+        maven { url "https://plugins.gradle.org/m2/" }
+        mavenCentral()
+        jcenter()
+    }
+}
+
+plugins {
+    id 'idea'
+    id 'java'
+    id 'com.google.cloud.tools.jib' version '3.0.0' apply false
+    id 'io.freefair.lombok' version '5.1.0' apply false
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE' apply false
+    id 'com.gorylenko.gradle-git-properties' version '2.3.1' apply false
+}
+
+allprojects {
+    defaultTasks 'clean', 'build'
+
+    repositories {
+        flatDir {
+            dirs "$rootDir${File.separator}lib"
+        }
+        maven { url "https://maven.aliyun.com/repository/central" }
+        maven { url "https://maven.aliyun.com/repository/jcenter" }
+        maven { url "https://maven.aliyun.com/repository/spring" }
+        mavenCentral()
+        jcenter()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'io.freefair.lombok'
+    apply plugin: "io.spring.dependency-management"
+
+    version = 'latest'
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+
+    test {
+        useJUnitPlatform()
+    }
+
+    dependencies {
+//        implementation 'com.google.code.findbugs:annotations:3.0.1'
+//        implementation 'com.google.guava:guava:29.0-jre'
+    }
+
+    configurations {
+        all {
+            exclude group: 'com.zaxxer', module: 'HikariCP-java7'
+            exclude group: 'javax.servlet', module: 'servlet-api'
+            exclude group: 'com.alibaba', module: 'fastjson'
+            exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk7'
+        }
+    }
+
+    dependencyManagement {
+        dependencies {
+        }
+    }
+}
+
