@@ -1,4 +1,4 @@
-package alankzh.leetcode;
+package alankzh.leetcode.projectof21day;
 
 @Deprecated
 public class LeetCode11 {

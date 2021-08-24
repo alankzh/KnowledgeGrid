@@ -1,7 +1,5 @@
-package alankzh.leetcode;
+package alankzh.leetcode.projectof21day;
 
-
-import java.util.Arrays;
 
 /**
  *

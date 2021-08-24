@@ -1,4 +1,4 @@
-package alankzh.leetcode;
+package alankzh.leetcode.projectof21day;
 
 public class LeetCode153 {
     public static void main(String[] args) {

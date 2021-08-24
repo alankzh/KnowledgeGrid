@@ -16,14 +16,22 @@ public class BuildUtil {
 
         TreeNode root = new TreeNode(arr[0]);
 
-        int i = 1;
+        linkTree(arr, root, 1);
 
-//        for (int i=0; i<)
+        return root;
+    }
 
-
-
-
-        return null;
+    private static void linkTree(Integer[] arr, TreeNode cur, int i) {
+        int left = i*2 - 1;
+        int right = i*2;
+        if (left < arr.length && arr[left] != null) {
+            cur.left = new TreeNode(arr[left]);
+            linkTree(arr, cur.left, left + 1);
+        }
+        if (right < arr.length && arr[right] != null) {
+            cur.right = new TreeNode(arr[right]);
+            linkTree(arr, cur.right, right + 1);
+        }
     }
 
 }

@@ -1,10 +1,7 @@
-package alankzh.leetcode;
-
-import org.w3c.dom.Node;
+package alankzh.leetcode.projectof21day;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Stack;
 
 /**
  * 按层打印即可。按层打印，要么选择额外的数据结构，保存当前节点所在层。

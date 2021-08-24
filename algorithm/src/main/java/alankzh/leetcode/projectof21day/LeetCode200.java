@@ -1,4 +1,4 @@
-package alankzh.leetcode;
+package alankzh.leetcode.projectof21day;
 
 /**
  * 1. 可暴力求解，其实就是 并查集
