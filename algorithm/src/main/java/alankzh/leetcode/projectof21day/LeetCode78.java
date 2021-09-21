@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * 回溯是基于dfs之上的剪枝，掌握不牢靠
+ *
  * 模板:
 
  res = []
@@ -20,6 +21,7 @@ import java.util.List;
             backtrack(新的未探索区域, res, path)
             path.pop()
 
+ 解决一个回溯问题，实际上就是一个决策树的遍历过程
  递归，向树的下一层遍历，for循环，在树的同一层遍历
  */
 @Deprecated
