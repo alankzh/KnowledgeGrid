@@ -6,6 +6,9 @@ import java.util.Stack;
 
 /**
  * 快速排序的性能依赖于划分是否平衡
+ * 常数因子很小，而且是原址排序
+ * 甚至在虚存环境中也能很好的工作
+ *
  */
 public class QuickSort {
 
@@ -18,6 +21,7 @@ public class QuickSort {
             // 递归出口
             return;
         }
+
         int k = partition(a, p, r);
         quickSort(a, p, k - 1);
         quickSort(a, k + 1, r);
@@ -30,6 +34,7 @@ public class QuickSort {
      */
     static Random random = new Random();
 
+    /** 实现了对子数组的原址重排  */
     private static int partition(int[] a, int p, int r) {
         // 主元 pivot element
         // 也可以随机化选取主元

@@ -1,9 +1,16 @@
 package alankzh.introductiontoalgorithms;
 
 
+import java.util.PriorityQueue;
 
 /**
  * 堆排序
+ * max-heapify, 负责维护堆性质，复杂度为O(lgn)
+ * build-max-heap, 建堆过程，具有线性复杂度，
+ * heap-sort, 需要用到最大堆，时间复杂度为O(nlgn),功能是对数组进行原址排序
+ *
+ * max-heap-insert, heap-extract-max,heap-increase-key,heap-maximum过程，
+ * 时间复杂度为O(lgn), 过程是利用堆实现一个优先队列
  */
 public class HeapSort {
 
@@ -257,7 +264,7 @@ public class HeapSort {
 
 
     public static void main(String[] args) {
-        int[] array = new int[]{16,4,10,14,7,9,3,2,8,1};
+        int[] array = new int[]{4,2,1,1,0,2,0,3};
 
 //        Heap heap = new Heap(array, HeapType.MAX);
 //        heap.printHeap();
@@ -268,9 +275,9 @@ public class HeapSort {
 //        heap.printArray();
         HeapPriorityQueue heapPriorityQueue = new HeapPriorityQueue(array, HeapType.MAX);
 
-        System.out.println(heapPriorityQueue.priority());
-        System.out.println(heapPriorityQueue.extractPriority());
-        heapPriorityQueue.increasePriority(3, 100);
+//        System.out.println(heapPriorityQueue.priority());
+//        System.out.println(heapPriorityQueue.extractPriority());
+//        heapPriorityQueue.increasePriority(3, 100);
         heapPriorityQueue.printSelf();
 //        heapPriorityQueue.insert(10086);
 //        heapPriorityQueue.printSelf();
