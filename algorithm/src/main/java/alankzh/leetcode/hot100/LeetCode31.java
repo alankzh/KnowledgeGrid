@@ -1,6 +1,4 @@
-package alankzh.hot100;
-
-import alankzh.leetcode.projectof21day.LeetCode17;
+package alankzh.leetcode.hot100;
 
 import java.util.Arrays;
 

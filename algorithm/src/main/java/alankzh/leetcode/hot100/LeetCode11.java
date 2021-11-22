@@ -1,4 +1,4 @@
-package alankzh.hot100;
+package alankzh.leetcode.hot100;
 
 /**
  * 两个关键思路
