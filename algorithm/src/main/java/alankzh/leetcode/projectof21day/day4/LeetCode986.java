@@ -1,4 +1,4 @@
-package alankzh.leetcode.projectof21day;
+package alankzh.leetcode.projectof21day.day4;
 
 import alankzh.common.PrintUtil;
 
@@ -10,8 +10,44 @@ public class LeetCode986 {
         int[][] first = new int[][]{{0,2},{5,10},{13,23},{24,25}};
         int[][] second = new int[][]{{1,5},{8,12},{15,24},{25,26}};
 
-        int[][] result = intervalIntersection(first, second);
+        int[][] result = new LeetCode986().intervalIntersection2(first, second);
         PrintUtil.printTwoDimensionalArray(result);
+    }
+
+    public int[][] intervalIntersection2(int[][] firstList, int[][] secondList) {
+        int index1 = 0;
+        int index2 = 0;
+        List<int[]> result = new ArrayList<>();
+        while (index1 < firstList.length && index2 < secondList.length) {
+            int[] first = firstList[index1];
+            int[] second = secondList[index2];
+            int c = Integer.compare(first[first.length - 1], second[second.length - 1]);
+            int[] s = mixed2(first, second);
+            if (s != null) {
+                result.add(s);
+            }
+            if (c == 0) {
+                index1 ++;
+                index2 ++;
+            } else if (c == -1) {
+                index1 ++;
+            } else {
+                index2 ++;
+            }
+        }
+
+        int[][] list = new int[result.size()][];
+        return result.toArray(list);
+    }
+
+    private int[] mixed2(int[] first, int[] second) {
+        int right = Math.min(first[first.length -1], second[second.length - 1]);
+        int left = Math.max(first[0], second[0]);
+        if (left > right) {
+            return null;
+        } else {
+            return new int[]{left, right};
+        }
     }
 
     public static int[][] intervalIntersection(int[][] firstList, int[][] secondList) {
