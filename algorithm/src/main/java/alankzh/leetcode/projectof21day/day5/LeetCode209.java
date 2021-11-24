@@ -1,10 +1,7 @@
-package alankzh.leetcode.projectof21day;
+package alankzh.leetcode.projectof21day.day5;
 
 
-/**
- *
- */
-@Deprecated
+
 public class LeetCode209 {
 
     public static void main(String[] args) {
@@ -20,8 +17,29 @@ public class LeetCode209 {
         int[] nums = new int[]{2,3,1,2,4,3};
 
 
-        int result = solution.minSubArrayLen(target, nums);
+        int result = solution.minSubArrayLen2(target, nums);
         System.out.println(result);
+    }
+
+    /**
+     * 更新窗口的当前和
+     */
+    public int minSubArrayLen2(int target, int[] nums) {
+        long sum = 0;
+        int left = 0;
+        int right = 0;
+        int minLength = Integer.MAX_VALUE;
+        for ( ; right < nums.length; right ++) {
+            sum += nums[right];
+            while (sum >= target) {
+                int l = right - left + 1;
+                minLength = minLength > l ? l : minLength;
+                sum -= nums[left];
+                left ++;
+            }
+        }
+        if (minLength == Integer.MAX_VALUE) return 0;
+        return minLength;
     }
 
     /**
