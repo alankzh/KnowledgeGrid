@@ -1,4 +1,4 @@
-package alankzh.leetcode.projectof21day;
+package alankzh.leetcode.projectof21day.day7;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -23,7 +23,6 @@ import java.util.Queue;
     }
  }
  */
-@Deprecated
 public class LeetCode117 {
 
     private static class Node {
@@ -50,6 +49,79 @@ public class LeetCode117 {
         LeetCode117 solution = new LeetCode117();
 
 
+    }
+
+    /**
+     * 每次迭代把下一层的指针处理好，到下下一层时，下下层的上一层已经被next指针链接，故可以按next指针迭代
+     */
+    public Node connect3(Node root) {
+        if (root == null) {
+            return null;
+        }
+
+
+        Node cur = root;
+        Node nextFirst = null;
+        Node nextPre = null;
+        while (cur != null || nextFirst != null) {
+            if (cur == null && nextFirst != null) {
+                // 下一层遍历开始，初始化
+                cur = nextFirst;
+                nextFirst = null;
+                nextPre = null;
+            }
+
+            if (cur.left != null) {
+                if (nextFirst == null) nextFirst = cur.left;
+                if (nextPre != null) nextPre.next = cur.left;
+                nextPre = cur.left;
+            }
+            if (cur.right != null) {
+                if (nextFirst == null) nextFirst = cur.right;
+                if (nextPre != null) nextPre.next = cur.right;
+                nextPre = cur.right;
+            }
+
+            cur = cur.next;
+        }
+
+        return root;
+    }
+
+    /**
+     * 取queue中的size，作为这次while迭代中处理的次数，此即为此层的个数
+     */
+    public Node connect2(Node root) {
+        if (root == null) {
+            return null;
+        }
+
+        Queue<Node> queue = new LinkedList<Node>();
+        queue.add(root);
+        root.next = null;
+
+        while (queue.size() > 0) {
+            int rowSize = queue.size();
+            Node pre = null;
+            for (int i=0; i<rowSize; i++) {
+                Node node = queue.poll();
+                if (i == rowSize - 1) {
+                    node.next = null;
+                }
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+                if (pre != null) {
+                    pre.next = node;
+                }
+                pre = node;
+            }
+        }
+
+        return root;
     }
 
     public Node connect(Node root) {

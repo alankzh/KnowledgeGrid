@@ -1,4 +1,4 @@
-package alankzh.leetcode.projectof21day;
+package alankzh.leetcode.projectof21day.day7;
 
 import alankzh.common.BuildUtil;
 import alankzh.common.PrintUtil;
@@ -6,8 +6,9 @@ import alankzh.common.TreeNode;
 
 
 /**
- * 双重递归是一个方案，但是相比easy难度的题，太复杂
+ * 还可以使用树hash，和打印之后的kmp比较
  */
+@Deprecated
 public class LeetCode572 {
 
     public static void main(String[] args) {
