@@ -1,4 +1,4 @@
-package alankzh.leetcode.projectof21day;
+package alankzh.leetcode.projectof21day.day8;
 
 import java.util.LinkedList;
 import java.util.Queue;

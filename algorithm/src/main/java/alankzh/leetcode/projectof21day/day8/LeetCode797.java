@@ -1,8 +1,7 @@
-package alankzh.leetcode.projectof21day;
+package alankzh.leetcode.projectof21day.day8;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * 路径和深度优先搜索的逻辑不太明晰
